@@ -1,0 +1,86 @@
+#Select all the data and different coloumns with information in them.
+SELECT *
+FROM fortune_companies;
+
+#Indicate all companies that have employees lesser than 2000 and revenue equal/greater to $200 in descending order.
+SELECT *
+FROM fortune_companies
+WHERE employees < 2000
+AND revenue >= 200
+ORDER BY revenue desc;
+
+# Indicate all companies that have employees greater than 2000 and revenue greater than $100 in ascending order.
+SELECT *
+FROM fortune_companies
+WHERE employees > 2000
+AND revenue >= 100
+ORDER BY revenue asc;
+
+# Indicate all companies that have paid time off days equal/greater to 20 or maternity leave weeks equal/greater than 10 in ascending order. 
+SELECT *
+FROM fortune_companies
+WHERE paid_time_off_days >= 20
+OR maternity_leave_weeks >= 10
+ORDER BY paid_time_off_days asc;
+
+# Indicate all companies that have paid time off days equal/greater to 22 or maternity leave weeks equal/greater to 15 in descending order.
+SELECT *
+FROM fortune_companies
+WHERE paid_time_off_days >= 22
+OR maternity_leave_weeks >= 15
+ORDER BY paid_time_off_days desc;
+
+# Show the total sum of revenue of all fortune companies.
+SELECT sum(revenue)
+FROM fortune_companies;
+
+#Show the company that has minumum revenue.
+SELECT min(revenue)
+FROM fortune_companies;
+
+#Show the company that has maximum revenue.
+SELECT max(revenue)
+FROM fortune_companies;
+
+#Show the total sum of paid time off days of all fortune companies.
+SELECT sum(paid_time_off_days)
+FROM fortune_companies;
+
+#Show the company that has a minimum maternity leave weeks.
+SELECT min(maternity_leave_weeks)
+FROM fortune_companies;
+
+#Show the company that has the maximum amount of employees.
+SELECT max(employees)
+FROM fortune_companies;
+
+#Show the average revenue of all fortune companies.
+SELECT avg(revenue)
+FROM fortune_companies;
+
+# Which company in the Retail industry has the least revenue, and what's their revenue? 
+SELECT company_name, min(revenue)
+FROM fortune_companies
+WHERE industry = 'Retail'
+
+# Indicate the amount of coloumns company id has.
+SELECT count(company_id)
+FROM fortune_companies;
+
+# Which companies have healthcare benefits *and* at least 20 paid time off days?
+SELECT company_name
+FROM fortune_companies
+WHERE paid_time_off_days>20
+AND healthcare_benefits=1;
+
+#Indicate the industries that have revenue greater than $300, combined together.
+SELECT industry, sum(revenue) as revenue
+FROM fortune_companies
+GROUP BY industry
+HAVING revenue>=300;
+
+# Indicate the average maternity leave weeks among all the industries.
+SELECT industry, avg(maternity_leave_weeks) as maternity_leave_weeks
+FROM fortune_companies
+GROUP BY industry
+HAVING maternity_leave_weeks > 12;
